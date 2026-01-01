@@ -1,4 +1,11 @@
-FROM python:3.14-slim
-WORKDIR docker/student
-COPY . .
-CMD ["python","student.py"]
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY . /app
+
+# Install dependencies
+RUN pip install --no-cache-dir pytest
+
+# Run pytest
+CMD ["pytest"]
