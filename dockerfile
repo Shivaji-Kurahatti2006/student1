@@ -8,4 +8,5 @@ COPY . /app
 RUN pip install --no-cache-dir pytest
 
 # Run pytest
-CMD ["pytest"]
+ENTRYPOINT ["sh", "-c"]
+CMD ["python student.py && pytest test_student.py"]
