@@ -1,22 +1,19 @@
-# Import the function if it's in another file, or define it here
-def calculate_grade(average):
-    if 90 <= average <= 100:
-        return "S"
-    elif 80 <= average <= 89:
-        return "A"
-    elif 65 <= average <= 79:
-        return "B"
-    elif 50 <= average <= 64:
-        return "C"
-    elif 40 <= average <= 49:
-        return "D"
-    else:
-        return "F"
+import student_grade
 
-# Predefined student marks
-student_marks = [85, 78, 92]
+def test_grade_S():
+    assert student_grade.calculate_grade(95) == "S"
 
-def test_student_grade():
-    average_marks = sum(student_marks) / len(student_marks)
-    grade = calculate_grade(average_marks)
-    assert grade == "A"
+def test_grade_A():
+    assert student_grade.calculate_grade(85) == "A"
+
+def test_grade_B():
+    assert student_grade.calculate_grade(70) == "B"
+
+def test_grade_C():
+    assert student_grade.calculate_grade(55) == "C"
+
+def test_grade_D():
+    assert student_grade.calculate_grade(45) == "D"
+
+def test_grade_F():
+    assert student_grade.calculate_grade(30) == "F"

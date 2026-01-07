@@ -1,37 +1,54 @@
-# Function to calculate grade based on average marks
-def calculate_grade(average):
-    if 90 <= average <= 100:
+# student_grade.py
+# Program to calculate student grade based on average marks
+
+import sys
+
+def calculate_grade(avg):
+    """Return grade based on average marks."""
+    if avg >= 90:
         return "S"
-    elif 80 <= average <= 89:
+    elif avg >= 80:
         return "A"
-    elif 65 <= average <= 79:
+    elif avg >= 65:
         return "B"
-    elif 50 <= average <= 64:
+    elif avg >= 50:
         return "C"
-    elif 40 <= average <= 49:
+    elif avg >= 40:
         return "D"
     else:
         return "F"
 
-# Predefined student details
-student = {
-    "name": "Shivaji Kurahatti",
-    "department": "Computer Science",
-    "semester": "5th",
-    "marks": [85, 78, 92]  # marks in three subjects
-}
 
-# Calculate average
-average_marks = sum(student["marks"]) / len(student["marks"])
+if __name__ == "__main__":
+    print("=== Student Grade Calculator ===")
 
-# Get grade
-grade = calculate_grade(average_marks)
+    try:
+        if len(sys.argv) == 7:
+            # Case 1: Arguments passed (for Jenkins or CLI)
+            name = sys.argv[1]
+            dept = sys.argv[2]
+            sem = sys.argv[3]
+            m1 = float(sys.argv[4])
+            m2 = float(sys.argv[5])
+            m3 = float(sys.argv[6])
+        else:
+            # Case 2: Console input
+            name = input("Enter student name: ")
+            dept = input("Enter department: ")
+            sem = input("Enter semester: ")
+            m1 = float(input("Enter marks of subject 1: "))
+            m2 = float(input("Enter marks of subject 2: "))
+            m3 = float(input("Enter marks of subject 3: "))
 
-# Display student details and grade
-print("--- Student Report ---")
-print(f"Name       : {student['name']}")
-print(f"Department : {student['department']}")
-print(f"Semester   : {student['semester']}")
-print(f"Marks      : {student['marks']}")
-print(f"Average    : {average_marks:.2f}")
-print(f"Grade      : {grade}")
+        avg = (m1 + m2 + m3) / 3
+        grade = calculate_grade(avg)
+
+        print("\n=== Student Details ===")
+        print("Name :", name)
+        print("Department :", dept)
+        print("Semester :", sem)
+        print("Average Marks :", round(avg, 2))
+        print("Grade :", grade)
+
+    except ValueError:
+        print("Invalid input! Please enter numeric values for marks.")
